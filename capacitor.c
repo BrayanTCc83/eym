@@ -1,10 +1,10 @@
 #include <math.h>
-#include "componentes.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "componentes.h"
 
 const farad_metro_t $E = 8.85*10E-12;
-const double µ = 10E-9;
+const double micro = 10E-9;
 const double M = 10E3;
 const double m = 10E-3;
 
@@ -38,7 +38,7 @@ Capacitor *crearCapacitor(Material *dielectrico, area_t areaPlacas, distancia_t 
     return capacitor;
 }
 
-Capacitor *crearCapacitorFijo(volt_t voltajeMaximo, µ_farad_t capacitancia) {
+Capacitor *crearCapacitorFijo(volt_t voltajeMaximo, micro_farad_t capacitancia) {
     Capacitor *capacitor = (Capacitor*) malloc(sizeof(Capacitor));
     capacitor->configuracion = NULL;
 
@@ -72,7 +72,7 @@ bool calcularPropiedades(Capacitor *capacitor) {
 
     capacitor->capacitancia = 
         capacitor->configuracion->dielectrico->constanteDielectrica * $E *
-        (capacitor->configuracion->areaPlacas/(capacitor->configuracion->distancia)) / µ;
+        (capacitor->configuracion->areaPlacas/(capacitor->configuracion->distancia)) / micro;
     capacitor->voltajeMaximo = 
         capacitor->configuracion->dielectrico->campoElectricoRuptura * 
         capacitor->configuracion->distancia * M;
@@ -88,7 +88,7 @@ void mostrarCapacitor(Capacitor capacitor) {
     printf(" --- Capacitor ---\n");
     printf(" - Nombre:\t\t%s\n", capacitor.nombre?capacitor.nombre : "Sin nombre");
     printf(" - Voltaje maximo:\t%lf [V]\n", capacitor.voltajeMaximo);
-    printf(" - Capacitancia:\t%lf [µF]\n", capacitor.capacitancia);
+    printf(" - Capacitancia:\t%lf [microF]\n", capacitor.capacitancia);
     printf(" - Carga actual:\t%lf [C]\n", capacitor.carga);
     printf(" - Voltaje actual:\t%lf [V]\n", capacitor.voltaje);
     printf(" - Corriente actual:\t%lf [A]\n", capacitor.corriente);

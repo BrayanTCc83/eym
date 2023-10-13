@@ -6,7 +6,7 @@ typedef double volt_t;
 typedef double ampere_t;
 typedef double coulomb_t;
 typedef double ohm_t, ohm_metro_t;
-typedef double µ_farad_t;
+typedef double micro_farad_t;
 typedef double farad_metro_t;
 typedef double joule_t;
 typedef double watt_t;
@@ -37,7 +37,7 @@ typedef struct {
     CapacitorConfiguracion *configuracion;
     // Propiedades resultantes del capacitor
     coulomb_t   carga;
-    µ_farad_t     capacitancia;
+    micro_farad_t     capacitancia;
     volt_t      voltajeMaximo, voltaje;
     ampere_t    corriente;
     // Referencia externa
@@ -58,7 +58,7 @@ Material *crearMaterial(const string);
 void propiedadesDielectricas(Material*,double, double);
 
 Capacitor *crearCapacitor(Material*, area_t, distancia_t);
-Capacitor *crearCapacitorFijo(volt_t, µ_farad_t);
+Capacitor *crearCapacitorFijo(volt_t, micro_farad_t);
 void cambiarMaterial(Capacitor*, Material*);
 void cambiarGeometria(Capacitor*, area_t, distancia_t);
 bool calcularPropiedades(Capacitor*);
