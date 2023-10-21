@@ -13,7 +13,7 @@ Capacitor *crearCapacitor(Material *dielectrico, area_t areaPlacas, distancia_t 
     capacitor->configuracion->material = dielectrico;
     capacitor->configuracion->area = areaPlacas;
     capacitor->configuracion->distancia = distancia;
-    capacitor->estado.carga = 0;
+    capacitor->carga = 0;
     capacitor->estado.corriente = 0;
     capacitor->estado.voltaje = 0;
     calcularPropiedadesCapacitor(capacitor);
@@ -27,7 +27,7 @@ Capacitor *crearCapacitorFijo(volt_t voltajeMaximo, mcr_farad_t capacitancia) {
 
     capacitor->voltajeMaximo = voltajeMaximo;
     capacitor->capacitancia = capacitancia;
-    capacitor->estado.carga = 0;
+    capacitor->carga = 0;
     capacitor->estado.corriente = 0;
     capacitor->estado.voltaje = 0;
 
@@ -63,25 +63,15 @@ bool calcularPropiedadesCapacitor(Capacitor *capacitor) {
     return true;
 }
 
-void asignarIdentificador(Capacitor* capacitor, const string nombre) {
-    capacitor->nombre = nombre;
-}
-
-void mostrarEstadoCapacitor(Capacitor capacitor) {
-    printf("\t--- Capacitor [%s]---\n", capacitor.nombre?capacitor.nombre : "Sin nombre");
-    printf(" - Voltaje maximo:\t%lf [V]\n", capacitor.voltajeMaximo);
-    printf(" - Capacitancia:\t%lf [mcrF]\n", capacitor.capacitancia);
-    printf(" - Carga actual:\t%lf [C]\n", capacitor.estado.carga);
-    printf(" - Corriente actual:\t%lf [A]\n", capacitor.estado.corriente);
-    printf(" - Voltaje actual:\t%lf [V]\n", capacitor.estado.voltaje);
-}
-
-void mostrarCapacitor(Capacitor capacitor) {
-    mostrarEstadoCapacitor(capacitor);
+void mostrarCapacitor(Capacitor* capacitor) {
+    mostrarEstado(*((componente_ptr)capacitor));
+    printf(" - Carga actual:\t%.10lf [C]\n", capacitor->carga);
+    printf(" - Voltaje maximo:\t%.10lf [V]\n", capacitor->voltajeMaximo);
+    printf(" - Capacitancia:\t%.10lf [mcrF]\n", capacitor->capacitancia);
     
-    if(!capacitor.configuracion)
+    if(!capacitor->configuracion)
         return;
-    printf(" - Distancia placas:\t%lf [mm]\n", capacitor.configuracion->distancia);
-    printf(" - Area placas: \t%lf [m2]\n", capacitor.configuracion->area);
-    printf(" - Dielectrico: \t%s\n", capacitor.configuracion->material->nombre);
+    printf(" - Distancia placas:\t%.10lf [mm]\n", capacitor->configuracion->distancia);
+    printf(" - Area placas: \t%.10lf [m2]\n", capacitor->configuracion->area);
+    printf(" - Dielectrico: \t%s\n", capacitor->configuracion->material->nombre);
 }
