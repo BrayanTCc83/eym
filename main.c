@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "componentes.h"
+#include "./componentesElectricos/componentes.h"
 
 extern farad_metro_t $E;
 
