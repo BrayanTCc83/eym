@@ -1,7 +1,9 @@
 componentesElectricos=./componentesElectricos/
+sistemas=./sistemas/
 
 run: compilacion
 	./magnetismo.out
 
 compilacion:
-	gcc -std=c2x -o magnetismo.out *.c ${componentesElectricos}*.c -L${componentesElectricos}
+	g++ -o magnetismo.out main.cpp ${componentesElectricos}*.c ${sistemas}*.cpp
+		-L${componentesElectricos} -L${sistemas}
